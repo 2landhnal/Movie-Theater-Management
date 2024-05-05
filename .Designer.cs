@@ -1,6 +1,6 @@
 ﻿namespace Movie_Theater_Management
 {
-    partial class MainForm
+    partial class Form_Genre
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,14 @@
         {
             getBtn = new Button();
             addBtn = new Button();
-            refreshBtn = new Button();
+            updateBtn = new Button();
             dataGridView1 = new DataGridView();
             groupBox1 = new GroupBox();
+            deleteBtn = new Button();
             label2 = new Label();
             label1 = new Label();
-            textBox_tuoi = new TextBox();
-            textBox_Ten = new TextBox();
+            textBox_Name = new TextBox();
+            textBox_ID = new TextBox();
             consoleBox = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox1.SuspendLayout();
@@ -44,7 +45,7 @@
             // 
             // getBtn
             // 
-            getBtn.Location = new Point(115, 76);
+            getBtn.Location = new Point(21, 76);
             getBtn.Name = "getBtn";
             getBtn.Size = new Size(94, 29);
             getBtn.TabIndex = 0;
@@ -54,7 +55,7 @@
             // 
             // addBtn
             // 
-            addBtn.Location = new Point(285, 76);
+            addBtn.Location = new Point(218, 76);
             addBtn.Name = "addBtn";
             addBtn.Size = new Size(94, 29);
             addBtn.TabIndex = 1;
@@ -62,15 +63,15 @@
             addBtn.UseVisualStyleBackColor = true;
             addBtn.Click += addBtn_Click;
             // 
-            // refreshBtn
+            // updateBtn
             // 
-            refreshBtn.Location = new Point(459, 76);
-            refreshBtn.Name = "refreshBtn";
-            refreshBtn.Size = new Size(94, 29);
-            refreshBtn.TabIndex = 2;
-            refreshBtn.Text = "Refresh";
-            refreshBtn.UseVisualStyleBackColor = true;
-            refreshBtn.Click += refreshBtn_Click;
+            updateBtn.Location = new Point(396, 76);
+            updateBtn.Name = "updateBtn";
+            updateBtn.Size = new Size(94, 29);
+            updateBtn.TabIndex = 2;
+            updateBtn.Text = "Update";
+            updateBtn.UseVisualStyleBackColor = true;
+            updateBtn.Click += updateBtn_Click;
             // 
             // dataGridView1
             // 
@@ -84,15 +85,18 @@
             dataGridView1.RowTemplate.Height = 29;
             dataGridView1.Size = new Size(587, 213);
             dataGridView1.TabIndex = 3;
+            dataGridView1.CellClick += dataGridView1_CellClick;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(deleteBtn);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(textBox_tuoi);
-            groupBox1.Controls.Add(textBox_Ten);
+            groupBox1.Controls.Add(textBox_Name);
+            groupBox1.Controls.Add(textBox_ID);
             groupBox1.Controls.Add(dataGridView1);
-            groupBox1.Controls.Add(refreshBtn);
+            groupBox1.Controls.Add(updateBtn);
             groupBox1.Controls.Add(addBtn);
             groupBox1.Controls.Add(getBtn);
             groupBox1.Location = new Point(58, 52);
@@ -102,37 +106,48 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "groupBox1";
             // 
+            // deleteBtn
+            // 
+            deleteBtn.Location = new Point(573, 76);
+            deleteBtn.Name = "deleteBtn";
+            deleteBtn.Size = new Size(94, 29);
+            deleteBtn.TabIndex = 8;
+            deleteBtn.Text = "Delete";
+            deleteBtn.UseVisualStyleBackColor = true;
+            deleteBtn.Click += deleteBtn_Click;
+            // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Location = new Point(407, 33);
             label2.Name = "label2";
-            label2.Size = new Size(38, 20);
+            label2.Size = new Size(49, 20);
             label2.TabIndex = 7;
-            label2.Text = "Tuoi";
+            label2.Text = "Name";
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Location = new Point(64, 33);
             label1.Name = "label1";
-            label1.Size = new Size(32, 20);
+            label1.Size = new Size(24, 20);
             label1.TabIndex = 6;
-            label1.Text = "Ten";
+            label1.Text = "ID";
+            label1.Click += label1_Click;
             // 
-            // textBox_tuoi
+            // textBox_Name
             // 
-            textBox_tuoi.Location = new Point(459, 26);
-            textBox_tuoi.Name = "textBox_tuoi";
-            textBox_tuoi.Size = new Size(125, 27);
-            textBox_tuoi.TabIndex = 5;
+            textBox_Name.Location = new Point(459, 26);
+            textBox_Name.Name = "textBox_Name";
+            textBox_Name.Size = new Size(125, 27);
+            textBox_Name.TabIndex = 5;
             // 
-            // textBox_Ten
+            // textBox_ID
             // 
-            textBox_Ten.Location = new Point(115, 26);
-            textBox_Ten.Name = "textBox_Ten";
-            textBox_Ten.Size = new Size(125, 27);
-            textBox_Ten.TabIndex = 4;
+            textBox_ID.Location = new Point(115, 26);
+            textBox_ID.Name = "textBox_ID";
+            textBox_ID.Size = new Size(125, 27);
+            textBox_ID.TabIndex = 4;
             // 
             // consoleBox
             // 
@@ -162,13 +177,14 @@
 
         private Button getBtn;
         private Button addBtn;
-        private Button refreshBtn;
+        private Button updateBtn;
         private DataGridView dataGridView1;
         private GroupBox groupBox1;
         private Label label2;
         private Label label1;
-        private TextBox textBox_tuoi;
-        private TextBox textBox_Ten;
+        private TextBox textBox_Name;
+        private TextBox textBox_ID;
         private TextBox consoleBox;
+        private Button deleteBtn;
     }
 }

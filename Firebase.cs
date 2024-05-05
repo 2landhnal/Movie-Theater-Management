@@ -1,27 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Firebase.Database;
 
-using FireSharp.Config;
-using FireSharp.Interfaces;
-using FireSharp.Response;
 
 namespace Movie_Theater_Management
 {
     public partial class Firebase_Connect : Form
     {
-        IFirebaseConfig _config = new FirebaseConfig
-        {
-            AuthSecret = "N5ZcmKVbqP4InPTJYkbIzZ5aZ9qAcKC8bLGUomhd",
-            BasePath = "https://winform-dc210-default-rtdb.asia-southeast1.firebasedatabase.app/"
-        };
-        public IFirebaseClient client { get; private set; }
+        static string auth = "N5ZcmKVbqP4InPTJYkbIzZ5aZ9qAcKC8bLGUomhd"; // your app secret
+        static public FirebaseClient client = null;
+
         public Firebase_Connect()
         {
             InitializeComponent();
@@ -34,12 +20,18 @@ namespace Movie_Theater_Management
                 return;
             }
 
-            client = new FireSharp.FirebaseClient(_config);
+            client = new FirebaseClient(
+              "https://winform-dc210-default-rtdb.asia-southeast1.firebasedatabase.app/",
+              new FirebaseOptions
+              {
+                  AuthTokenAsyncFactory = () => Task.FromResult(auth)
+              }
+            );
 
             if (client != null)
             {
                 MessageBox.Show("Kết nối Firebase thành công !!!");
-                var mainForm = new MainForm(client);
+                var mainForm = new Form_Genre();
                 mainForm.Show();
             }
         }
