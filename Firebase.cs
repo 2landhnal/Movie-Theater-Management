@@ -15,6 +15,11 @@ namespace Movie_Theater_Management
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            FirebaseAuth();
+        }
+
+        void FirebaseAuth()
+        {
             if (client != null)
             {
                 return;
@@ -30,8 +35,10 @@ namespace Movie_Theater_Management
 
             if (client != null)
             {
+                this.Hide();
                 MessageBox.Show("Kết nối Firebase thành công !!!");
-                var mainForm = new Form_Genre();
+                var mainForm = new HomePage();
+                mainForm.Closed += (s, args) => this.Close();
                 mainForm.Show();
             }
         }

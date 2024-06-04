@@ -1,20 +1,20 @@
 ﻿using Firebase.Database;
 using Firebase.Database.Query;
-using Newtonsoft.Json;
 using RestSharp;
 using System.Data;
 
 namespace Movie_Theater_Management
 {
-    public partial class Form_Genre : Form
+    public partial class Form_Payment : Form
     {
         FirebaseClient _client;
         DataTable dt = new DataTable();
         Query query = new Query();
-        public Form_Genre()
+        public Form_Payment()
         {
             dt.Columns.Add("id");
             dt.Columns.Add("name");
+            dt.Columns.Add("iconLink");
 
             _client = Firebase_Connect.client;
             InitializeComponent();
@@ -22,6 +22,7 @@ namespace Movie_Theater_Management
             dataGridView1.DataSource = dt;
             dataGridView1.Columns[0].HeaderText = "Id";
             dataGridView1.Columns[1].HeaderText = "Name";
+            dataGridView1.Columns[1].HeaderText = "Icon Link";
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
@@ -39,27 +40,29 @@ namespace Movie_Theater_Management
             }
             else
             {
-                var genre = new Genre
-                {
-                    id = textBox_ID.Text,
-                    name = textBox_Name.Text
-                };
-                var table = await Helper.GetDataTable<Genre>("genres");
+                var payment = new PaymentMethod
+                (
+                    id: textBox_ID.Text,
+                    name: textBox_Name.Text,
+                    iconLink: textBoxLink.Text
+
+                );
+                var table = await Helper.GetDataTable<PaymentMethod>("payment_methods");
                 foreach (var tmp in table)
                 {
-                    if (tmp.Object.id == genre.id)
+                    if (tmp.Object.id == payment.id)
                     {
-                        MessageBox.Show("Genre id already exist!");
+                        MessageBox.Show("Payment id already exist!");
                         return;
                     }
                 }
 
                 await _client
-                    .Child("genres")
-                    .Child(genre.id)
-                    .PutAsync(genre);
+                    .Child("payment_methods")
+                    .Child(payment.id)
+                    .PutAsync(payment);
 
-                MessageBox.Show("Đã thêm mới thành công genre");
+                MessageBox.Show("Đã thêm mới thành công payment");
 
                 UpdateDtgv();
 
@@ -77,12 +80,13 @@ namespace Movie_Theater_Management
             dt.Rows.Clear();
             try
             {
-                var table = await Helper.GetDataTable<Genre>("genres");
+                var table = await Helper.GetDataTable<PaymentMethod>("payment_methods");
                 foreach (var roww in table)
                 {
                     DataRow row = dt.NewRow();
                     row["id"] = roww.Object.id;
                     row["name"] = roww.Object.name;
+                    row["iconLink"] = roww.Object.iconLink;
                     dt.Rows.Add(row);
                 }
             }
@@ -112,22 +116,24 @@ namespace Movie_Theater_Management
             }
             else
             {
-                var genre = new Genre
-                {
-                    id = textBox_ID.Text,
-                    name = textBox_Name.Text
-                };
-                var table = await Helper.GetDataTable<Genre>("genres");
+                var payment = new PaymentMethod
+                (
+                    id: textBox_ID.Text,
+                    name: textBox_Name.Text,
+                    iconLink: textBoxLink.Text
+
+                );
+                var table = await Helper.GetDataTable<PaymentMethod>("payment_methods");
                 foreach (var tmp in table)
                 {
-                    if (tmp.Object.id == genre.id)
+                    if (tmp.Object.id == payment.id)
                     {
                         await _client
-                            .Child("genres")
-                            .Child(genre.id)
-                            .PutAsync(genre);
+                            .Child("payment_methods")
+                            .Child(payment.id)
+                            .PutAsync(payment);
 
-                        MessageBox.Show($"Update genre {tmp.Object.id} successfully");
+                        MessageBox.Show($"Update payment {tmp.Object.id} successfully");
 
                         UpdateDtgv();
 
@@ -136,52 +142,9 @@ namespace Movie_Theater_Management
                     }
                 }
 
-                MessageBox.Show("Genre id isn't exist!");
+                MessageBox.Show("Payment id isn't exist!");
                 return;
             }
-        }
-
-        async Task AddGenresAsync()
-        {
-            var task = await query.GetResponseFromURLAsync("https://api.themoviedb.org/3/genre/movie/list?language=en");
-            RestResponse response = task;
-            string json = response.Content;
-
-            var model = JsonConvert.DeserializeObject<GenreSearchObj>(json);
-
-            if (model == null)
-            {
-                Console.WriteLine("null");
-                return;
-            }
-
-            if (model.genres == null)
-            {
-                Console.WriteLine("genres null");
-                return;
-            }
-            try
-            {
-                foreach (Genre tmp in model.genres)
-                {
-                    await _client
-                      .Child("genres")
-                      .Child(tmp.id)
-                      .PutAsync(tmp);
-                }
-                MessageBox.Show("Success!!!");
-
-                UpdateDtgv();
-            }
-            catch (Exception ee)
-            {
-                MessageBox.Show(ee.ToString());
-            }
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private async void deleteBtn_Click(object sender, EventArgs e)
@@ -193,19 +156,21 @@ namespace Movie_Theater_Management
             }
             else
             {
-                var genre = new Genre
-                {
-                    id = textBox_ID.Text,
-                    name = textBox_Name.Text
-                };
-                var table = await Helper.GetDataTable<Genre>("genres");
+                var payment = new PaymentMethod
+                (
+                    id: textBox_ID.Text,
+                    name: textBox_Name.Text,
+                    iconLink: textBoxLink.Text
+
+                );
+                var table = await Helper.GetDataTable<PaymentMethod>("payment_methods");
                 foreach (var tmp in table)
                 {
-                    if (tmp.Object.id == genre.id)
+                    if (tmp.Object.id == payment.id)
                     {
                         await _client
-                    .Child("genres")
-                    .Child(genre.id)
+                    .Child("payment_methods")
+                    .Child(payment.id)
                     .DeleteAsync();
 
                         MessageBox.Show("Delete successfully!");
