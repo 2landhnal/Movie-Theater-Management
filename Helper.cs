@@ -66,6 +66,17 @@ namespace Movie_Theater_Management
             }
         }
 
+        public static void LoadingForm(Form form)
+        {
+            form.Enabled = false;
+            form.Cursor = Cursors.WaitCursor;
+        }
+        public static void LoadingDone(Form form)
+        {
+            form.Enabled = true;
+            form.Cursor = Cursors.Default;
+        }
+
         public static void setStyle(Control root)
         {
             var dtgs = GetAllControls(root).Where(x => x is DataGridView).ToList();
@@ -172,10 +183,10 @@ namespace Movie_Theater_Management
         }
         static public async Task<IReadOnlyCollection<FirebaseObject<T>>?> GetDataTable<T>(string tableName)
         {
+            var _client = Firebase_Connect.client;
+            if (_client == null) return null;
             try
             {
-                var _client = Firebase_Connect.client;
-                if (_client == null) return null;
                 var result = await _client
                   .Child(tableName)
                   .OnceAsync<T>();
@@ -184,8 +195,6 @@ namespace Movie_Theater_Management
             }
             catch (Exception ex)
             {
-                var _client = Firebase_Connect.client;
-                if (_client == null) return null;
                 var result = await _client
                   .Child(tableName)
                   .OnceAsListAsync<T>();

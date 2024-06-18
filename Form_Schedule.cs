@@ -547,15 +547,11 @@ namespace Movie_Theater_Management
             movieID.Leave += (s, ev) => HandleAutoCompleteTextChange(movieID);
 
             roomID.AutoCompleteCustomSource = new AutoCompleteStringCollection();
-            var theaterTable = await Helper.GetDataTable<Theater>("theaters");
+            var roomTable = await Helper.GetDataTable<Room>("rooms");
             List<Room> roomList = new List<Room>();
-            foreach (var tmp in theaterTable)
+            foreach (var tmp in roomTable)
             {
-                var roomTable = await Firebase_Connect.client.Child("rooms").Child($"{tmp.Object.id}").OnceAsync<Room>();
-                foreach (var tmp2 in roomTable)
-                {
-                    roomList.Add(tmp2.Object);
-                }
+                roomList.Add(tmp.Object);
             }
             List<string> roomIDList = new List<string>();
             foreach (var tmp in roomList)

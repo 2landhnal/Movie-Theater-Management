@@ -5,7 +5,7 @@ namespace Movie_Theater_Management
 {
     public partial class Firebase_Connect : Form
     {
-        static string auth = "N5ZcmKVbqP4InPTJYkbIzZ5aZ9qAcKC8bLGUomhd"; // your app secret
+        static string auth = Secret.authKey; // your app secret
         static public FirebaseClient client = null;
 
         public Firebase_Connect()

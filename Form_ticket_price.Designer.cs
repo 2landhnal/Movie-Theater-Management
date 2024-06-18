@@ -1,6 +1,6 @@
 ﻿namespace Movie_Theater_Management
 {
-    partial class Form_Schedule
+    partial class Form_ticket_price
     {
         /// <summary>
         /// Required designer variable.
@@ -33,26 +33,24 @@
             updateBtn = new Button();
             dataGridView1 = new DataGridView();
             groupBox1 = new GroupBox();
+            comboBox_seatType = new FlatComboBox();
+            label7 = new Label();
+            label8 = new Label();
+            textBox_price = new TextBox();
+            deleteBtn = new Button();
+            label1 = new Label();
+            textBox_scheduleId = new TextBox();
             btn_search = new Button();
             comboBox_option = new FlatComboBox();
-            timePicker = new CustomeDateTimePicker();
             label10 = new Label();
-            datePicker = new CustomeDateTimePicker();
             textBox_search = new TextBox();
-            roomID = new FlatComboBox();
-            movieID = new FlatComboBox();
-            label4 = new Label();
-            label3 = new Label();
-            deleteBtn = new Button();
-            label2 = new Label();
-            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // getBtn
             // 
-            getBtn.Location = new Point(18, 352);
+            getBtn.Location = new Point(47, 312);
             getBtn.Margin = new Padding(3, 2, 3, 2);
             getBtn.Name = "getBtn";
             getBtn.Size = new Size(82, 22);
@@ -63,7 +61,7 @@
             // 
             // addBtn
             // 
-            addBtn.Location = new Point(191, 352);
+            addBtn.Location = new Point(186, 312);
             addBtn.Margin = new Padding(3, 2, 3, 2);
             addBtn.Name = "addBtn";
             addBtn.Size = new Size(82, 22);
@@ -74,7 +72,7 @@
             // 
             // updateBtn
             // 
-            updateBtn.Location = new Point(346, 352);
+            updateBtn.Location = new Point(341, 312);
             updateBtn.Margin = new Padding(3, 2, 3, 2);
             updateBtn.Name = "updateBtn";
             updateBtn.Size = new Size(82, 22);
@@ -88,32 +86,29 @@
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(45, 79);
+            dataGridView1.Location = new Point(47, 78);
             dataGridView1.Margin = new Padding(3, 2, 3, 2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.RowTemplate.Height = 29;
-            dataGridView1.Size = new Size(514, 131);
+            dataGridView1.Size = new Size(529, 123);
             dataGridView1.TabIndex = 3;
             dataGridView1.CellClick += dataGridView1_CellClick;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(btn_search);
             groupBox1.Controls.Add(comboBox_option);
-            groupBox1.Controls.Add(timePicker);
+            groupBox1.Controls.Add(comboBox_seatType);
             groupBox1.Controls.Add(label10);
-            groupBox1.Controls.Add(datePicker);
+            groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(textBox_search);
-            groupBox1.Controls.Add(roomID);
-            groupBox1.Controls.Add(movieID);
-            groupBox1.Controls.Add(label4);
-            groupBox1.Controls.Add(label3);
+            groupBox1.Controls.Add(label8);
+            groupBox1.Controls.Add(textBox_price);
             groupBox1.Controls.Add(deleteBtn);
-            groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label1);
+            groupBox1.Controls.Add(textBox_scheduleId);
             groupBox1.Controls.Add(dataGridView1);
             groupBox1.Controls.Add(updateBtn);
             groupBox1.Controls.Add(addBtn);
@@ -122,14 +117,79 @@
             groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(3, 2, 3, 2);
-            groupBox1.Size = new Size(606, 396);
+            groupBox1.Size = new Size(632, 350);
             groupBox1.TabIndex = 4;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Schedule";
+            groupBox1.Text = "Ticket price";
+            // 
+            // comboBox_seatType
+            // 
+            comboBox_seatType.FormattingEnabled = true;
+            comboBox_seatType.Location = new Point(138, 257);
+            comboBox_seatType.Margin = new Padding(3, 2, 3, 2);
+            comboBox_seatType.Name = "comboBox_seatType";
+            comboBox_seatType.Size = new Size(190, 23);
+            comboBox_seatType.TabIndex = 29;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(341, 262);
+            label7.Name = "label7";
+            label7.Size = new Size(33, 15);
+            label7.TabIndex = 16;
+            label7.Text = "Price";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(56, 262);
+            label8.Name = "label8";
+            label8.Size = new Size(55, 15);
+            label8.TabIndex = 15;
+            label8.Text = "Seat type";
+            // 
+            // textBox_price
+            // 
+            textBox_price.Location = new Point(382, 257);
+            textBox_price.Margin = new Padding(3, 2, 3, 2);
+            textBox_price.Name = "textBox_price";
+            textBox_price.Size = new Size(195, 23);
+            textBox_price.TabIndex = 14;
+            textBox_price.KeyPress += textBox_rate_KeyPress;
+            // 
+            // deleteBtn
+            // 
+            deleteBtn.Location = new Point(494, 312);
+            deleteBtn.Margin = new Padding(3, 2, 3, 2);
+            deleteBtn.Name = "deleteBtn";
+            deleteBtn.Size = new Size(82, 22);
+            deleteBtn.TabIndex = 8;
+            deleteBtn.Text = "Delete";
+            deleteBtn.UseVisualStyleBackColor = true;
+            deleteBtn.Click += deleteBtn_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(56, 219);
+            label1.Name = "label1";
+            label1.Size = new Size(69, 15);
+            label1.TabIndex = 6;
+            label1.Text = "Schedule ID";
+            // 
+            // textBox_scheduleId
+            // 
+            textBox_scheduleId.Location = new Point(138, 214);
+            textBox_scheduleId.Margin = new Padding(3, 2, 3, 2);
+            textBox_scheduleId.Name = "textBox_scheduleId";
+            textBox_scheduleId.Size = new Size(439, 23);
+            textBox_scheduleId.TabIndex = 4;
+            textBox_scheduleId.KeyPress += textBox_scheduleId_KeyPress;
             // 
             // btn_search
             // 
-            btn_search.Location = new Point(485, 31);
+            btn_search.Location = new Point(494, 33);
             btn_search.Margin = new Padding(3, 2, 3, 2);
             btn_search.Name = "btn_search";
             btn_search.Size = new Size(82, 22);
@@ -140,132 +200,39 @@
             // comboBox_option
             // 
             comboBox_option.FormattingEnabled = true;
-            comboBox_option.Location = new Point(321, 30);
+            comboBox_option.Location = new Point(330, 32);
             comboBox_option.Margin = new Padding(3, 2, 3, 2);
             comboBox_option.Name = "comboBox_option";
             comboBox_option.Size = new Size(148, 23);
             comboBox_option.TabIndex = 37;
             // 
-            // timePicker
-            // 
-            timePicker.BorderColor = Color.PaleVioletRed;
-            timePicker.BorderSize = 0;
-            timePicker.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-            timePicker.Location = new Point(428, 312);
-            timePicker.Margin = new Padding(3, 2, 3, 2);
-            timePicker.MinimumSize = new Size(4, 35);
-            timePicker.Name = "timePicker";
-            timePicker.Size = new Size(115, 35);
-            timePicker.SkinColor = Color.FromArgb(68, 71, 90);
-            timePicker.TabIndex = 31;
-            timePicker.TextColor = Color.FromArgb(189, 147, 249);
-            // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(33, 35);
+            label10.Location = new Point(42, 37);
             label10.Name = "label10";
             label10.Size = new Size(42, 15);
             label10.TabIndex = 35;
             label10.Text = "Search";
             // 
-            // datePicker
-            // 
-            datePicker.BorderColor = Color.PaleVioletRed;
-            datePicker.BorderSize = 0;
-            datePicker.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-            datePicker.Location = new Point(86, 312);
-            datePicker.Margin = new Padding(3, 2, 3, 2);
-            datePicker.MinimumSize = new Size(4, 35);
-            datePicker.Name = "datePicker";
-            datePicker.Size = new Size(219, 35);
-            datePicker.SkinColor = Color.FromArgb(68, 71, 90);
-            datePicker.TabIndex = 30;
-            datePicker.TextColor = Color.FromArgb(189, 147, 249);
-            // 
             // textBox_search
             // 
-            textBox_search.Location = new Point(110, 30);
+            textBox_search.Location = new Point(90, 32);
             textBox_search.Margin = new Padding(3, 2, 3, 2);
             textBox_search.Name = "textBox_search";
-            textBox_search.Size = new Size(189, 23);
+            textBox_search.Size = new Size(218, 23);
             textBox_search.TabIndex = 34;
             // 
-            // roomID
-            // 
-            roomID.FormattingEnabled = true;
-            roomID.Location = new Point(86, 271);
-            roomID.Margin = new Padding(3, 2, 3, 2);
-            roomID.Name = "roomID";
-            roomID.Size = new Size(457, 23);
-            roomID.TabIndex = 29;
-            // 
-            // movieID
-            // 
-            movieID.FormattingEnabled = true;
-            movieID.Location = new Point(86, 223);
-            movieID.Margin = new Padding(3, 2, 3, 2);
-            movieID.Name = "movieID";
-            movieID.Size = new Size(457, 23);
-            movieID.TabIndex = 28;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(386, 323);
-            label4.Name = "label4";
-            label4.Size = new Size(33, 15);
-            label4.TabIndex = 27;
-            label4.Text = "Time";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(45, 323);
-            label3.Name = "label3";
-            label3.Size = new Size(31, 15);
-            label3.TabIndex = 25;
-            label3.Text = "Date";
-            // 
-            // deleteBtn
-            // 
-            deleteBtn.Location = new Point(501, 352);
-            deleteBtn.Margin = new Padding(3, 2, 3, 2);
-            deleteBtn.Name = "deleteBtn";
-            deleteBtn.Size = new Size(82, 22);
-            deleteBtn.TabIndex = 8;
-            deleteBtn.Text = "Delete";
-            deleteBtn.UseVisualStyleBackColor = true;
-            deleteBtn.Click += deleteBtn_Click;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(21, 277);
-            label2.Name = "label2";
-            label2.Size = new Size(53, 15);
-            label2.TabIndex = 7;
-            label2.Text = "Room ID";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(18, 229);
-            label1.Name = "label1";
-            label1.Size = new Size(54, 15);
-            label1.TabIndex = 6;
-            label1.Text = "Movie ID";
-            // 
-            // Form_Schedule
+            // Form_ticket_price
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(700, 446);
+            ClientSize = new Size(737, 400);
             Controls.Add(groupBox1);
             Margin = new Padding(3, 2, 3, 2);
-            Name = "Form_Schedule";
+            Name = "Form_ticket_price";
             Text = "MainForm";
-            Load += Form_Schedule_Load;
+            Load += Form_ticket_price_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
@@ -279,15 +246,13 @@
         private Button updateBtn;
         private DataGridView dataGridView1;
         private GroupBox groupBox1;
-        private Label label2;
         private Label label1;
         private Button deleteBtn;
-        private Label label3;
-        private Label label4;
-        private FlatComboBox roomID;
-        private FlatComboBox movieID;
-        private CustomeDateTimePicker datePicker;
-        private CustomeDateTimePicker timePicker;
+        private Label label7;
+        private Label label8;
+        private TextBox textBox_price;
+        private TextBox textBox_scheduleId;
+        private FlatComboBox comboBox_seatType;
         private Button btn_search;
         private FlatComboBox comboBox_option;
         private Label label10;

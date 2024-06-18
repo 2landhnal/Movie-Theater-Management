@@ -42,6 +42,12 @@ namespace Movie_Theater_Management
             this.theaterId = theaterId;
             this.room_type = room_type;
         }
+
+        static public Room GetRoom(int index, string theaterId, int room_type, string name)
+        {
+            string id = $"{theaterId}_{index}";
+            return new Room(id, name, theaterId, room_type);
+        }
     }
 
     public class Schedule
@@ -83,12 +89,22 @@ namespace Movie_Theater_Management
         public int seatType;
         public string name;
 
-        public Room_Seat(string roomId, string name, int seatType)
+        public Room_Seat(string roomId, string id, int seatType, string name)
         {
             this.roomId = roomId;
-            this.name = name;
+            this.id = id;
             this.seatType = seatType;
-            this.id = roomId + "_" + name;
+            this.name = name;
+        }
+
+        public static Room_Seat createRoomSeat(string roomId, string name, int seatType)
+        {
+            Room_Seat res = new Room_Seat(roomId, "", seatType, name);
+            res.roomId = roomId;
+            res.name = name;
+            res.seatType = seatType;
+            res.id = roomId + "_" + name;
+            return res;
         }
     }
 

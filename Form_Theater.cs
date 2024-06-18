@@ -157,7 +157,7 @@ namespace Movie_Theater_Management
                         await _client.Child("room_seat")
                        .Child(room.Object.id)
                        .Child(room.Object.id + "_" + cell.Name)
-                       .PutAsync(new Room_Seat(room.Object.id, cell.Name, cell.IntValue));
+                       .PutAsync(Room_Seat.createRoomSeat(room.Object.id, cell.Name, cell.IntValue));
                     }
                 }
             }
@@ -181,7 +181,6 @@ namespace Movie_Theater_Management
                 {
                     Room room = new Room(theaterId + "_" + (i + 1).ToString(), $"Room {i + 1}", theaterId, 0);
                     await _client.Child("rooms")
-                        .Child(theaterId.ToString())
                         .Child(theaterId + "_" + (i + 1).ToString())
                         .PutAsync(room);
                 }

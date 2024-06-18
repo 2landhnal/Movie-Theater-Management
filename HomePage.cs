@@ -23,6 +23,10 @@
             this.menuStrip1.BackColor = Helper.backColor2;
             this.menuStrip1.RenderMode = ToolStripRenderMode.Professional;
             this.menuStrip1.Renderer = new ToolStripProfessionalRenderer(new CustomColorTable());
+            foreach (ToolStripMenuItem v in menuStrip1.Items)
+            {
+                v.ForeColor = Color.White;
+            }
             //menuStrip1.
         }
 
@@ -109,9 +113,25 @@
 
         }
 
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void roomToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Form_Room newForm = new Form_Room();
+            //Cursor.Position = this.PointToScreen(new Point(0, 0));
+            OpenChildForm(newForm);
+        }
 
+        private void roomMapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form_room_map newForm = new Form_room_map();
+            //Cursor.Position = this.PointToScreen(new Point(0, 0));
+            OpenChildForm(newForm);
+        }
+
+        private void ticketPricceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form_ticket_price newForm = new Form_ticket_price();
+            //Cursor.Position = this.PointToScreen(new Point(0, 0));
+            OpenChildForm(newForm);
         }
     }
 }

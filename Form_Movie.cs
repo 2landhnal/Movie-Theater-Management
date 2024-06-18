@@ -6,6 +6,7 @@ using System.Data;
 
 namespace Movie_Theater_Management
 {
+    enum searchMovieOptions { title, releaseDate, runtime, state };
     public partial class Form_Movie : Form
     {
         FirebaseClient _client;
@@ -112,26 +113,31 @@ namespace Movie_Theater_Management
             }*/
         }
 
-        async void UpdateDtgv()
+        void showTable(IReadOnlyCollection<FirebaseObject<Movie>>? table)
         {
             dt.Rows.Clear();
+            foreach (var roww in table)
+            {
+                DataRow row = dt.NewRow();
+                row["id"] = roww.Object.id;
+                row["title"] = roww.Object.title;
+                row["original_language"] = roww.Object.original_language;
+                row["overview"] = roww.Object.overview;
+                row["release_date"] = roww.Object.release_date;
+                row["poster_path"] = roww.Object.poster_path;
+                row["runtime"] = roww.Object.runtime;
+                row["streaming_state"] = roww.Object.streaming_state;
+                row["vote_average"] = roww.Object.vote_average;
+                dt.Rows.Add(row);
+            }
+        }
+
+        async void UpdateDtgv()
+        {
             try
             {
                 var table = await Helper.GetDataTable<Movie>("movies");
-                foreach (var roww in table)
-                {
-                    DataRow row = dt.NewRow();
-                    row["id"] = roww.Object.id;
-                    row["title"] = roww.Object.title;
-                    row["original_language"] = roww.Object.original_language;
-                    row["overview"] = roww.Object.overview;
-                    row["release_date"] = roww.Object.release_date;
-                    row["poster_path"] = roww.Object.poster_path;
-                    row["runtime"] = roww.Object.runtime;
-                    row["streaming_state"] = roww.Object.streaming_state;
-                    row["vote_average"] = roww.Object.vote_average;
-                    dt.Rows.Add(row);
-                }
+                showTable(table);
             }
             catch (Exception ex)
             {
@@ -466,6 +472,43 @@ namespace Movie_Theater_Management
         private void textBox_language_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void Form_Movie_Load(object sender, EventArgs e)
+        {
+            foreach (var v in Enum.GetValues(typeof(searchMovieOptions)))
+            {
+                comboBox_option.Items.Add(Helper.ToTitleCase(v.ToString()));
+            }
+        }
+
+        private async void btn_search_Click(object sender, EventArgs e)
+        {
+
+            switch (comboBox_option.Text)
+            {
+                case "Title":
+                    var table = await Helper.GetDataTable<Movie>("movies");
+                    List<FirebaseObject<Movie>> list = new List<FirebaseObject<Movie>>();
+                    foreach (var v in table)
+                    {
+                        //list.Add(v);
+                        if (v.Object.title.ToLower().Contains(textBox_search.Text.ToLower()))
+                        {
+                            list.Add(v);
+                        }
+                    }
+
+                    if (list.Count == 0)
+                    {
+                        MessageBox.Show("Not found");
+                        return;
+                    }
+                    showTable(list);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
